@@ -34,6 +34,6 @@ class HomeController extends Controller
 
         abort_unless($blog->is_open, 403); // 反対は abort_if
 
-        dd($blog);
+        return view('blog.show', compact('blog'));
     }
 }
