@@ -12,7 +12,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::with('user')->get();
+        $blogs = Blog::with('user')
+            ->withCount('comments')
+            ->orderByDesc('comments_count')
+            ->latest('updated_at')  // orderByDesc('updated_at')
+            ->get();
 
         return view('home', compact('blogs'));
     }

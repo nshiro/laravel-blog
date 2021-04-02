@@ -18,4 +18,12 @@ class Blog extends Model
             'name' => '（退会者）'
         ]);
     }
+
+    /**
+     * hasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
