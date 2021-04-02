@@ -29,6 +29,7 @@ class BlogFactory extends Factory
             //     return User::factory()->create()->id;
             // },
 
+            'is_open' => $this->faker->randomElement([true, true, true, true, false]), // [1,1,1,1,0]
             'title' => $this->faker->realText(20),
             'body' => $this->faker->realText(100),
             'updated_at' => $this->faker->dateTimeBetween('-10days', '0days'),
