@@ -17,9 +17,8 @@
 メルアド：<input type="text" name="email" value="{{ old('email') }}">
 <br>
 パスワード：<input type="password" name="password">
-
-
-<x-pref name="太郎" gender="男性" />
+<br>
+都道府県：<x-pref class="bb" id="myid" :default="old('pref')" />
 
 
 <br><br>
