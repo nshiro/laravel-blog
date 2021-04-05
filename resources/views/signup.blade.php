@@ -19,6 +19,9 @@
 パスワード：<input type="password" name="password">
 
 
+<x-pref name="太郎" gender="男性" />
+
+
 <br><br>
 <input type="submit" value="　送信する　">
 
