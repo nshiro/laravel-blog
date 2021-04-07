@@ -13,6 +13,7 @@
 
             @auth
                 <li><a href="/mypage">マイブログ一覧</a></li>
+                <li>ようこそ{{ auth()->user()->name }}さん！</li>
                 <li>
                     <form method="post" action="/mypage/logout">
                         @csrf
