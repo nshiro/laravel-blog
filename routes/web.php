@@ -18,7 +18,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('mypage/logout', [BlogController::class, 'logout']);
+    Route::post('mypage/logout', [UserLoginController::class, 'logout']);
 
     Route::get('mypage', [BlogController::class, 'index']);
+    Route::get('mypage/blogs/create', [BlogController::class, 'create']);
 });

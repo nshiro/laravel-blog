@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
+    /**
+     * 自分のブログの一覧表示
+     */
     public function index(Request $request)
     {
         // 自分のブログの一覧のみ表示される
@@ -20,14 +23,11 @@ class BlogController extends Controller
         return view('mypage.index', compact('blogs'));
     }
 
-    public function logout(Request $request)
+    /**
+     * ブログ新規登録画面
+     */
+    public function create()
     {
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('mypage/login')->with('message', 'ログアウトしました');
+        return view('mypage.blog.create');
     }
 }
