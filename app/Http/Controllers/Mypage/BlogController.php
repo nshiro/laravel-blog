@@ -56,9 +56,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog, Request $request)
     {
-        if ($request->user()->isNot($blog->user)) {
-            abort(403);
-        }
+        abort_if($request->user()->isNot($blog->user), 403);
 
         $data = old() ?: $blog;
 
@@ -70,14 +68,27 @@ class BlogController extends Controller
      */
     public function update(Blog $blog, BlogSaveRequest $request)
     {
-        if ($request->user()->isNot($blog->user)) {
-            abort(403);
-        }
+        abort_if($request->user()->isNot($blog->user), 403);
 
         $data = $request->validated();
 
         $blog->update($data);
 
         return redirect(route('mypage.blog.update', $blog))->with('message', 'ブログを更新しました');
+    }
+
+    /**
+     * ブログの削除
+     */
+    public function destroy(Blog $blog, Request $request)
+    {
+        abort_if($request->user()->isNot($blog->user), 403);
+
+        // 付属するコメントは、イベントを使って削除します。
+        // Models/Blog 参照。
+
+        $blog->delete();
+
+        return redirect('mypage');
     }
 }
