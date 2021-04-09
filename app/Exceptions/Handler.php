@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -38,4 +40,31 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $e
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
+     */
+    public function render($request, Throwable $e)
+    {
+        // if ($e instanceof TokenMismatchException) {
+        //     return back()->withErrors([
+        //         '_token' => 'セッションが切れました。もう一度送信お願いします。',
+        //     ])->withInput();
+        // }
+
+        if ($e instanceof TokenMismatchException) {
+            throw ValidationException::withMessages([
+                '_token' => trans('validation.csrf_token_mismatch'),
+            ]);
+        }
+
+        return parent::render($request, $e);
+    }
+
 }
