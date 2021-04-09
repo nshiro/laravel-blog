@@ -13,6 +13,8 @@ class Blog extends Model
         'is_open' => 'boolean',
     ];
 
+    protected $guarded = [];
+
     /**
      * belongsTo
      */

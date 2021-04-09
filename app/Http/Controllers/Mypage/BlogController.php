@@ -30,4 +30,29 @@ class BlogController extends Controller
     {
         return view('mypage.blog.create');
     }
+
+    /**
+     * ブログの新規登録処理
+     */
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string'],
+            'is_open' => ['nullable'],
+        ]);
+
+        $data['is_open'] = $request->boolean('is_open');
+
+        // $blog = Blog::create([
+        //     'title' => $data['title'],
+        //     'body' => $data['body'],
+        //     'is_open' => $data['is_open'],
+        //     'user_id' => $request->user()->id,
+        // ]);
+
+        $blog = $request->user()->blogs()->create($data);
+
+        dd($blog);
+    }
 }
