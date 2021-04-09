@@ -53,6 +53,20 @@ class BlogController extends Controller
 
         $blog = $request->user()->blogs()->create($data);
 
-        dd($blog);
+        return redirect(route('mypage.blog.edit', $blog))->with('message', '新規登録しました');
+    }
+
+    /**
+     * ブログの編集画面
+     */
+    public function edit(Blog $blog, Request $request)
+    {
+        if ($request->user()->isNot($blog->user)) {
+            abort(403);
+        }
+
+        $data = old() ?: $blog;
+
+        return view('mypage.blog.edit', compact('data'));
     }
 }
