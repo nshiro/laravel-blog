@@ -39,12 +39,9 @@ class BlogController extends Controller
     {
         $data = $request->validated();
 
-        // $blog = Blog::create([
-        //     'title' => $data['title'],
-        //     'body' => $data['body'],
-        //     'is_open' => $data['is_open'],
-        //     'user_id' => $request->user()->id,
-        // ]);
+        if ($request->hasFile('pict')) {
+            $data['pict'] = $request->file('pict')->store('blogs', 'public');
+        }
 
         $blog = $request->user()->blogs()->create($data);
 
@@ -71,6 +68,12 @@ class BlogController extends Controller
         abort_if($request->user()->isNot($blog->user), 403);
 
         $data = $request->validated();
+
+        if ($request->hasFile('pict')) {
+            // 古い画像の削除
+
+            $data['pict'] = $request->file('pict')->store('blogs', 'public');
+        }
 
         $blog->update($data);
 

@@ -16,7 +16,8 @@
 本文：<textarea name="body" style="width:600px; height:200px;">{{ old('body') }}</textarea>
 <br>
 公開する：<label><input type="checkbox" name="is_open" value="1" {{ (old('is_open') ? 'checked' : '') }}>公開する</label>
-
+<br>
+画像：<input type="file" name="pict">
 
 <br><br>
 <input type="submit" value="送信する">
