@@ -7,7 +7,9 @@
 <div>{!! nl2br(e($blog->body)) !!}</div>
 
 <!-- ここに画像表示予定 -->
-
+@if($blog->pict)
+<p><img src="{{ Storage::url($blog->pict) }}" alt="" srcset=""></p>
+@endif
 
 <p>書き手：{{ $blog->user->name }}</p>
 
