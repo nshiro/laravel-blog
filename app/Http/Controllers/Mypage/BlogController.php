@@ -71,6 +71,7 @@ class BlogController extends Controller
 
         if ($request->hasFile('pict')) {
             // 古い画像の削除
+            $blog->deletePictFile();
 
             $data['pict'] = $request->file('pict')->store('blogs', 'public');
         }
@@ -87,7 +88,7 @@ class BlogController extends Controller
     {
         abort_if($request->user()->isNot($blog->user), 403);
 
-        // 付属するコメントは、イベントを使って削除します。
+        // 画像と付属するコメントは、イベントを使って削除します。
         // Models/Blog 参照。
 
         $blog->delete();

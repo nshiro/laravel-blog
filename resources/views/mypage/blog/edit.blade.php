@@ -19,7 +19,7 @@
 <br>
 画像：<input type="file" name="pict">
 @if($blog->pict)
-<p><img src="{{ Storage::url($blog->pict) }}" alt="" srcset=""></p>
+<p><img src="{{ Storage::url($blog->pict) }}" alt="" srcset="" width="200"></p>
 @endif
 
 <br><br>

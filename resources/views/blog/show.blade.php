@@ -8,7 +8,7 @@
 
 <!-- ここに画像表示予定 -->
 @if($blog->pict)
-<p><img src="{{ Storage::url($blog->pict) }}" alt="" srcset=""></p>
+<p><img src="{{ Storage::url($blog->pict) }}" alt="" srcset="" width="200"></p>
 @endif
 
 <p>書き手：{{ $blog->user->name }}</p>
