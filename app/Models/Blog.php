@@ -36,6 +36,12 @@ class Blog extends Model
             // https://laravel.com/docs/8.x/collections#higher-order-messages
             // $blog->comments->each->delete();
         });
+
+        static::updating(function ($blog) {
+            if ($blog->isDirty('pict') && $blog->getOriginal('pict')) {
+                $blog->deletePictFile();
+            }
+        });
     }
 
     /**
@@ -66,8 +72,8 @@ class Blog extends Model
      */
     public function deletePictFile()
     {
-        if ($this->pict) {
-            Storage::disk('public')->delete($this->pict);
+        if ($path = $this->getOriginal('pict')) {
+            Storage::disk('public')->delete($path);
         }
     }
 }

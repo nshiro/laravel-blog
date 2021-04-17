@@ -44,4 +44,21 @@ class BlogSaveRequest extends FormRequest
             'is_open' => $this->boolean('is_open'),
         ]);
     }
+
+    /**
+     * 画像を保存し、検証済みの登録・更新用データを返す
+     *
+     * @return array
+     */
+    public function proceed()
+    {
+        $data = $this->validated();
+
+        if ($this->hasFile('pict')) {
+            // 古い画像の削除はイベント使って削除します
+            $data['pict'] = $this->file('pict')->store('blogs', 'public');
+        }
+
+        return $data;
+    }
 }
